@@ -1,90 +1,122 @@
-#include <iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
-struct dataPerpus{
-int id_buku[50],harga_buku[50];
-string nama;
-};
+#define ll long long
+time_t now = time(0);
+	int count = 1000;
+   	tm *ltm = localtime(&now);
 
-struct dataPerpus dt;
+void peminjaman(int menu, string nama, ll id_orang, ll id_pinjam, int day, int month, int year, int jml)
+{
+	
 
-int main(){
-  awal :
-  int byk;
-  int lama_peminjaman;
-  char buku_hilang;
-  cout<<"Banyak peminjaman buku : "; cin>>byk;
-  cout<<"\nMasukkan Nama Peminjam : ";cin>>dt.nama;
-  cout<<"\nINPUT DATA PEMINJAMAN BUKU"<<endl;
-  cout<<"Buku yang tersedia : "<<endl;
-   cout<<"| ID Buku| Nama Buku                      |\n";
-   cout<<"-------------------------------------------\n";
-   cout<<"| 1      | Desain Media Interaktif        |\n";
-   cout<<"| 2      | Teknik Pengelahan Audio & Video|\n";
-   cout<<"| 3      | Sistem Operasi                 |\n";
-   cout<<"| 4      | Desain Grafis                  |\n";
-  cout<<endl;
-  
-  for(int a=1; a<=byk; a++){
-    cout<<"Buku ke- "<<a<<endl;;
-    cout<<"ID Buku : "; cin>>dt.id_buku[a];
-    	switch (dt.id_buku[a]){
-    case 1 :
-    dt.harga_buku[a]=190000;
-    	
-    break;
-    case 2 :
-    dt.harga_buku[a]=70000;
-    
-    break;
-    case 3 :
-    dt.harga_buku[a]=150000;
-    
-    break;
-    case 4 :
-    dt.harga_buku[a]=200000;
-    
-    break;
-    default :
-    	cout<<"ID buku yang anda masukkan tidak tersedia"<<endl;
-    	cout<<"Silahkan masukkan kembali "<<endl;
-    	goto awal;
-    }
-    cout<<endl;
-    
-    
-  }
-  
+	if (menu == 1)
+	{
+		
+		cout << "PENGEMBALIAN \n";
+		cout << "Nama: " << nama << "\n";
+		cout << "ID: " << id_orang << "\n";
+		cout << "ID Pinjam: " << id_pinjam << "\n";
+		cout << "Tanggal Peminjaman: " << day << ", " << month << ", " << year << "\n";
+		cout << "Tanggal Pengembalian: " << ltm->tm_mday << ":" << 1 + ltm->tm_mon<< ":" <<  1900 + ltm->tm_year<< "\t\t|\n";
+		if ((day + 7) < (ltm->tm_mday ))
+		{
+			
+			cout << "\nDENDA : Rp. " << (1000 * ((day + 7)   + 6) / 7);
+			
+		}
+		else if(day == ltm->tm_mday ){
+			cout <<"TERIMA KASIH TELAH MENGEMBALIKAN BUKU TEPAT WAKTU\n";
 
-  cout<<"Lama Peminjaman (Hari): ";cin>>lama_peminjaman;
-  int terlambat = lama_peminjaman- 5;
-  int denda=0;
-  if(lama_peminjaman>5){
-    denda = terlambat *1000*byk;
-  }
-  
-  cout<<"\nData Buku Yang dipinjam :";
- 
-  for(int a=1; a<=byk; a++){
-    cout<<"\nData Buku ke "<<a;
-    cout<<"\nID Buku\t: "<<dt.id_buku[a];      
-    cout<<endl;
-    cout<<"Buku hilang ?(y/t)             : ";cin>>buku_hilang;
-if(buku_hilang=='y'){
-	cout<<"Harga untuk mengganti buku yang hilang : Rp."<<dt.harga_buku[a]<<endl;
-	system("exit");
-}else buku_hilang=0;
-  }
-  cout<<"\nLama Peminjaman    : "<<lama_peminjaman<<" hari";
-  cout<<"\nDenda              : Rp."<<denda;
-  
-  
-  cout<<"\nIngin mengulang? (y/t)"<<endl;      
-       char pilihan;
-	   cin>>pilihan;
-       if(pilihan=='y')
-       goto awal;
-       if(pilihan=='t')
-       cout<<"Terima kasih";
-  
+		} else
+		{
+			cout <<"TERIMA KASIH" << endl;
+		}
+	
+		
+	}
+	else if(menu == 2)
+	{
+	
+	
+		cout << "Nama: " << nama << "\n";
+		cout << "Nomor identitas: " << id_orang << "\n";
+		cout << "Nomor ID Pinjam: " << id_pinjam << "\n";
+		cout << "Tanggal Peminjaman : " << ltm->tm_mday << ":" <<  1 + ltm->tm_mon << ":" << 1900 + ltm->tm_year << "\t|\n";
+		cout <<"KEMBALIKAN BUKU SEBELUM TANGGAL: " << day + 7 << ", " << month << ", " << year << endl; 
+	
+	}
+}
+
+
+
+int main()
+{
+		
+	string nama, name;
+	int hh,bb,tttt,pil,jml;
+	ll id_peminjam,id_buku;
+  	
+
+	cout << "1. PENGEMBALIAN BUKU" << endl;
+	cout << "2. PEMINJAMAN BUKU" <<endl;
+	cout << "3. INFO BUKU HILANG" << endl;
+	cin >> pil;
+	if(pil == 1)
+	{
+		cout << "Nama peminjam\t: \n";
+		cin >> nama;
+		cout << "Nomor ID\t: " << endl;
+		cin >> id_peminjam;
+		cout <<"ID Peminjaman\t: " << endl;
+		cin >> id_buku;
+		cout << "Jumlah buku\t: " << endl;
+		cin >> jml;
+		cout << "Tanggal Peminjaman\t: " << endl;
+		cin >> hh;
+		cout << "Bulan\t\t: " << endl;
+		cin >> bb;
+		cout << "Tahun\t\t: " << endl;
+		cin >> tttt;
+		peminjaman(1,nama,id_peminjam,id_buku,hh,bb,tttt,jml);
+		
+	} else if(pil == 2)
+	{
+		cout << "Nama peminjam\t: " << endl;
+		cin >> nama;
+		cout << "Nomor ID\t: " << endl;
+		cin >> id_peminjam;
+		cout <<"ID Peminjaman\t: " << endl;
+		cin >> id_buku;
+		cout << "Jumlah buku\t: " << endl;
+		cin >> jml;
+		peminjaman(2,nama,id_peminjam, id_buku, bb,hh,tttt,jml);
+		
+		
+	}
+	else if(pil == 3)
+	{
+		cout << "Nama peminjam\t: " << endl;
+		cin >> nama;
+		cout << "Nomor ID\t: " << endl;
+		cin >> id_peminjam;
+		cout <<"ID Peminjaman\t: " << endl;
+		cin >> id_buku;
+		cout << "Jumlah buku\t: " << endl;
+		cin >> jml;
+		cout << "ANDA DIDENDA SEBESAR : Rp. " << jml * (rand() * 1000);
+	}
+	cout << "\n\nSearching nama peminjam : ";
+	cin >> name;
+	cout << "\n-------------------------------------\n";
+	if (name == nama)
+	{
+		cout << "Nama : " << nama << endl;
+		cout << "Nomor ID : " << id_peminjam;
+	} else
+	{
+		cout << "\nTidak ditemukan" << endl;
+	}
+	
+		
 }

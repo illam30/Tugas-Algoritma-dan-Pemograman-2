@@ -28,7 +28,7 @@ int main ()
         cout<<myarray[i]<<" ";
     }
     cout<<endl;
-    cout<<"mauskkan kata kunci yang ingin dicari:"; cin>>key;  
+    cout<<"masukkan kata kunci yang ingin dicari:"; cin>>key;  
     location = binarySearch(myarray, 0, 9, key);  
     if(location != -1)  {  
         cout<<"Kata kunci ditemukan pada index - "<<location; 
